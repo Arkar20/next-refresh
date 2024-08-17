@@ -16,16 +16,20 @@ export default function TodoList({ todos }: { todos: Todo[] }) {
     });
 
     const create = async (formData: FormData) => {
-        const name = formData.get("name") as string;
+        try {
+            const name = formData.get("name") as string;
 
-        addOptimisticMessage(name);
+            addOptimisticMessage(name);
 
-        form.current?.reset();
+            form.current?.reset();
 
-        await addTodo(name);
+            await addTodo(name);
+        } catch (error) {
+            alert("something went wrong");
+        }
     };
 
-    const form = useRef<HTMLFormElement>();
+    const form = useRef<HTMLFormElement>(null);
 
     return (
         <>
