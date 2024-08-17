@@ -1,8 +1,10 @@
 import React from "react";
 import TodoList from "./components/TodoList";
-import { todos } from "./types";
+import { prisma } from "@/db/prisma";
 
-export default function page() {
+export default async function page() {
+    const todos = await prisma.todo.findMany();
+
     return (
         <div>
             <h3>Todo App</h3>

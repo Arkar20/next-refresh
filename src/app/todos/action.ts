@@ -1,18 +1,13 @@
 "use server";
-
-import { Todo } from "./types";
-import { todos } from "./types";
-
+import { prisma } from "@/db/prisma"
+import { revalidatePath } from "next/cache";
 
 export const addTodo = async (name: string) => {
-    const todo: Todo = {
-        id: todos.length + 1,
-        name,
-        status: true,
-    };
-    todos.push(todo);
-
-    return {
-        message: 'success'
-    }
+    await prisma.todo.create({
+        data: {
+            name: name,
+            status: true
+        }
+    })
+    revalidatePath('/todos')
 }

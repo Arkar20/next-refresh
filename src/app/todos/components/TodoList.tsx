@@ -15,13 +15,13 @@ export default function TodoList({ todos }: { todos: Todo[] }) {
         ];
     });
 
-    async function create(formData: FormData) {
+    const create = async (formData: FormData) => {
         const name = formData.get("name") as string;
 
         addOptimisticMessage(name);
 
         await addTodo(name);
-    }
+    };
 
     return (
         <>
