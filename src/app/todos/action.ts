@@ -9,7 +9,7 @@ export const addTodo = async (name: string) => {
             status: true
         }
     })
-    throw Error('Something breaks');
+
 
     revalidatePath('/todos')
 }
