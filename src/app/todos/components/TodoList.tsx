@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useOptimistic } from "react";
+import React, { useOptimistic, useRef } from "react";
 import { addTodo } from "../action";
 import { Todo } from "../types";
 
@@ -20,12 +20,16 @@ export default function TodoList({ todos }: { todos: Todo[] }) {
 
         addOptimisticMessage(name);
 
+        form.current?.reset();
+
         await addTodo(name);
     };
 
+    const form = useRef<HTMLFormElement>();
+
     return (
         <>
-            <form action={create}>
+            <form action={create} ref={form}>
                 <input type="text" placeholder="enter..." name="name" />
             </form>
 
